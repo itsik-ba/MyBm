@@ -30,24 +30,27 @@ connection.connect( (error: any)=> {
 
   app.post('/register', (req, res) =>{
   try {
-    const name = req.body.name;
-    const email = req.body.email;
-    const password = req.body.password;
-    console.log(name, email, password);
+    const username = req.body.username;
+    const useremail = req.body.useremail;
+    const userpassword = req.body.userpassword;
 
-    connection.query('INSERT INTO user (name, email, password) VALUES (?, ?, ?)', [name, email, password],
-
+    
+    connection.query('INSERT INTO user (username, useremail, userpassword) VALUES (?, ?, ?)', [username, useremail, userpassword],
+    
     (err, result)=>{
-        if (result){
-          res.send(result);
-        }else{
-          res.send({massage:"error register user"})
-        }
+       if (err){
+        console.error(err);
+        res.status(500).send({ message: 'Error registering user' });
+    }else{
+        console.log(result);
+        res.status(200).send({ message: 'User registered successfully' });
+         } 
       }
     )
      
 } catch (error) {
-    console.error(error)
+    console.error(error);
+    res.status(500).send({ message: 'Error registering user' });
   }
   });
 
