@@ -7,9 +7,9 @@ import axios from "axios";
 
 const Register = () => {
   
-  const addAdmin =  (e:any)=> {
-    console.log("got here");
-     e.preventDefault();
+  const addAdmin = async (e:any)=> {
+   
+  e.preventDefault();
      const parms = e.target;
      const name = parms.name.value;
      const email = parms.email.value;
@@ -17,8 +17,12 @@ const Register = () => {
      console.log(name, email, password);
      
      try {
-       const res = axios.post('http://localhost:5173/addAdmin', {name, email, password});
-       console.log(res);
+       const res = await axios.post("http://localhost:3000/register",{
+        name: name,
+        email: email,
+        password: password,
+       })
+       console.log(res.data);
     } catch (error) {
       console.error(error);
      }

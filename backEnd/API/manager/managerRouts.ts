@@ -5,14 +5,13 @@ import {
     addAdmin
 
 
-
 }from "./managerControlls";
 
 
 
 
 router
-.post("/addAdmin", addAdmin)
+.post("/register", addAdmin)
 
 
 
