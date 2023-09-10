@@ -1,12 +1,14 @@
 import express from "express";
 import "./data/data";
+import cors from 'cors'
 const app = express();
-
+const Port = 5173
+app.use(cors())
 app.use(express.json());
 
-import clientsRoutes from "./API/clients/clientsRouts";
-app.use("/api/clients", clientsRoutes );
+import managerRoutes from "./API/manager/managerRouts";
+app.use("/api/manager", managerRoutes );
 
-app.listen( () => {
-    console.log(`Server is running`);
+app.listen( Port,() => {
+    console.log(`Server is running: ${Port}`);
   });

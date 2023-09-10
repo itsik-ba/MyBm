@@ -1,4 +1,4 @@
-import mysql2 from "mysql2";
+import mysql from "mysql2";
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -10,7 +10,7 @@ const dbConfig = {
     database: process.env.DB_NAME,
   };
 
-export const connection = mysql2.createConnection(dbConfig);
+export const connection = mysql.createConnection(dbConfig);
 
 
 connection.connect( (error: any)=> {
