@@ -7,11 +7,9 @@ import {
 
 }from "./managerControlls";
 
-
-
-
 router
-.post("/register", addAdmin)
+.post("/", addAdmin)
+
 
 
 

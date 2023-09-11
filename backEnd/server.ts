@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import mysql from "mysql2";
 import cors from "cors";
 
+
 const app = express();
 dotenv.config();
 app.use(cors())
@@ -28,35 +29,28 @@ connection.connect( (error: any)=> {
   });
 
 
-  app.post('/register', (req, res) =>{
+  app.post('/register', (req:any, res:any) =>{
   try {
-    const username = req.body.username;
-    const useremail = req.body.useremail;
-    const userpassword = req.body.userpassword;
+    console.log('Request Body:', req.body);
+    const { username, useremail, userpassword} = req.body;
 
-    
-    connection.query('INSERT INTO user (username, useremail, userpassword) VALUES (?, ?, ?)', [username, useremail, userpassword],
-    
-    (err, result)=>{
-       if (err){
-        console.error(err);
-        res.status(500).send({ message: 'Error registering user' });
-    }else{
-        console.log(result);
+    const data = `INSERT INTO user (username, useremail, userpassword) VALUES ( ?, ?, ?)`;
+     connection.query(data, [username, useremail, userpassword], (err, data) =>{
+     console.log(err);
+     if (data) {
+        console.log(data);
         res.status(200).send({ message: 'User registered successfully' });
-         } 
+      } else {
+        console.error(err);
+        res.status(500).send({ error: 'Error registering user' });
+       
       }
-    )
-     
-} catch (error) {
+     });
+  } catch (error:any) {
     console.error(error);
-    res.status(500).send({ message: 'Error registering user' });
+    res.status(500).send({ error: error.message });
   }
-  });
-
-
-
-
+});
 
 
 app.listen(3000, () => {

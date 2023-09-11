@@ -1,4 +1,3 @@
-
 import "./reg_log.scss";
 import user_Icon from "../../assets/person.png"
 import email_Icon from "../../assets/email.png"
@@ -7,25 +6,40 @@ import axios from "axios";
 import { useState } from "react";
 
 const Register = () => {
-
-    const [name, setName] = useState('')
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
+       
+    const [name, setName] = useState("")
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
 
   const addAdmin = async (e:any)=> {
    console.log(e)
   e.preventDefault();
+
      try {
-       const res = await axios.post("http://localhost:3000/register",{
+      console.log(name, email, password);
+       const res = await axios.post("http://localhost:3000/",{
         name: name,
         email: email,
         password: password,
        })
+
+      //  validation here
+       
+
+      // 
+
        console.log(res.data);
     } catch (error) {
       console.error(error);
      }
   } 
+    
+  const clearInput = () =>{
+    setName('');
+    setEmail('');
+    setPassword('');
+    console.log("clear the inputs");
+     }
 
   const goToLogin = ()=> {
    window.location.href="/login"
@@ -47,23 +61,39 @@ const Register = () => {
 
        <div className="inputs__input">
           <img src={user_Icon} alt="user icon" className="inputs__input__img"/>
-          <input type="text" className="inputs__input__inp" placeholder="שם" required name="name" onChange={(e) => {setName(e.target.value)}}/>
+          <input type="text" 
+          className="inputs__input__inp" 
+          placeholder="שם" 
+          required 
+          name="name" 
+          onChange={(e) => {setName(e.target.value)}}
+          />
         </div>
         
         <div className="inputs__input">
           <img src={email_Icon} alt="email icon" className="inputs__input__img"/>
-          <input type="email" className="inputs__input__inp" placeholder="אימייל" required name="email" onChange={(e) => {setEmail(e.target.value)}}/>
+          <input 
+          type="email" 
+          className="inputs__input__inp" 
+          placeholder="אימייל" 
+          required 
+          name="email" 
+          onChange={(e) => {setEmail(e.target.value)}}/>
         </div>
 
         <div className="inputs__input">
           <img src={password_Icon} alt="password icon" className="inputs__input__img"/>
-          <input type="password" className="inputs__input__inp" placeholder="סיסמה" required name="password" onChange={(e) => {setPassword(e.target.value)}}/>
+          <input type="password" 
+          className="inputs__input__inp" 
+          placeholder="סיסמה" 
+          required 
+          name="password" 
+          onChange={(e) => {setPassword(e.target.value)}}/>
         </div>
     </div>
-    <div className="subbmit-container">
-      <button className="submit" type="submit">הרשמה</button>
-     
-     </div>
+     <div className="subbmit-container">
+      <button className="submit" type="submit" onClick={clearInput}>הרשמה</button>
+      </div>
      </form>
 
      <button className="submit gray" onClick={goToLogin}>התחבר</button>
