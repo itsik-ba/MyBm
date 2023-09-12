@@ -12,7 +12,6 @@ const dbConfig = {
 
 export const connection = mysql.createConnection(dbConfig);
 
-
 connection.connect( (error: any)=> {
     if (error) {
       console.log(error);

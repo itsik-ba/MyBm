@@ -4,42 +4,52 @@ import email_Icon from "../../assets/email.png"
 import password_Icon from "../../assets/password.png"
 import axios from "axios";
 import { useState } from "react";
+import { Navigate  } from "react-router-dom";
+import Main_Page from "../../pages/userLoginBar/Main_Page";
+
+
 
 const Register = () => {
        
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const [errors, setErrors] = useState("")
 
   const addAdmin = async (e:any)=> {
    console.log(e)
   e.preventDefault();
 
-     try {
-      console.log(name, email, password);
-       const res = await axios.post("http://localhost:3000/",{
-        name: name,
-        email: email,
-        password: password,
-       })
-
-      //  validation here
-       
-
-      // 
-
-       console.log(res.data);
-    } catch (error) {
-      console.error(error);
-     }
-  } 
+   //  validation here
+   if(password.length < 3 || name.length < 3){
+    setErrors("הסיסמה והשם חייבים להכיל לפחות 6 תווים")
+   }
+  else{
+       try {
+        console.log(name, email, password);
+         const res = await axios.post("http://localhost:3000/",{
+          name: name,
+          email: email,
+          password: password,
+         })
+         console.log(res.data);    
+        setName("")
+        setEmail("")
+        setPassword("")
+        goToMainPage()
+      
+      } catch (error) {
+        console.error(error);
+       }
+  }
+  
+} 
     
-  const clearInput = () =>{
-    setName('');
-    setEmail('');
-    setPassword('');
-    console.log("clear the inputs");
-     }
+  const goToMainPage = () => {
+    
+    // window.location.href="/main"
+  }
+  
 
   const goToLogin = ()=> {
    window.location.href="/login"
@@ -55,7 +65,7 @@ const Register = () => {
 
       <form onSubmit={addAdmin}>
          <div className="register__errors">
-          <p className="register__errors__p">{}</p>
+          <p className="register__errors__p">{errors}</p>
           </div>
       <div className="inputs">
 
@@ -64,6 +74,7 @@ const Register = () => {
           <input type="text" 
           className="inputs__input__inp" 
           placeholder="שם" 
+          value={name}
           required 
           name="name" 
           onChange={(e) => {setName(e.target.value)}}
@@ -76,6 +87,7 @@ const Register = () => {
           type="email" 
           className="inputs__input__inp" 
           placeholder="אימייל" 
+          value={email}
           required 
           name="email" 
           onChange={(e) => {setEmail(e.target.value)}}/>
@@ -86,13 +98,14 @@ const Register = () => {
           <input type="password" 
           className="inputs__input__inp" 
           placeholder="סיסמה" 
+          value={password}
           required 
           name="password" 
           onChange={(e) => {setPassword(e.target.value)}}/>
         </div>
     </div>
      <div className="subbmit-container">
-      <button className="submit" type="submit" onClick={clearInput}>הרשמה</button>
+      <button className="submit" type="submit">הרשמה</button>
       </div>
      </form>
 
