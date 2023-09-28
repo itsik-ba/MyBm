@@ -4,8 +4,6 @@ import email_Icon from "../../assets/email.png"
 import password_Icon from "../../assets/password.png"
 import axios from "axios";
 import { useState } from "react";
-import { Navigate  } from "react-router-dom";
-import Main_Page from "../../pages/userLoginBar/Main_Page";
 
 
 
@@ -36,7 +34,7 @@ const Register = () => {
         setName("")
         setEmail("")
         setPassword("")
-        goToMainPage()
+        // goToMainPage()
       
       } catch (error) {
         console.error(error);
@@ -47,7 +45,7 @@ const Register = () => {
     
   const goToMainPage = () => {
     
-    // window.location.href="/main"
+    window.location.href="/main"
   }
   
 
@@ -71,7 +69,8 @@ const Register = () => {
 
        <div className="inputs__input">
           <img src={user_Icon} alt="user icon" className="inputs__input__img"/>
-          <input type="text" 
+          <input 
+          type="text" 
           className="inputs__input__inp" 
           placeholder="שם" 
           value={name}
@@ -95,7 +94,8 @@ const Register = () => {
 
         <div className="inputs__input">
           <img src={password_Icon} alt="password icon" className="inputs__input__img"/>
-          <input type="password" 
+          <input 
+          type="password" 
           className="inputs__input__inp" 
           placeholder="סיסמה" 
           value={password}

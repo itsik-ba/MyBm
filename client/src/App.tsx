@@ -7,6 +7,7 @@ import Contacts from "./pages/Contacts";
 import About from "./pages/About";
 import Footer from "./components/footer/Footer";
 import Login from "./components/register_login/Login";
+import Main_Page from "./pages/userLoginBar/Main_Page";
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
         <Route path='/login' element={<Login />}/> 
         <Route path='/contacts' element={<Contacts />}/> 
         <Route path='/about' element={<About />}/> 
+        <Route path='/main_page' element={<Main_Page />}/> 
       </Routes>
       <Footer />
       </div>

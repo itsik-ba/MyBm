@@ -2,14 +2,15 @@ import express from "express";
 const router = express.Router();
 
 import {
-    addAdmin
+    addAdmin,
+    loginAdmin
 
 
 }from "./managerControlls";
 
 router
 .post("/", addAdmin)
-
+.post('/login', loginAdmin)
 
 
 
