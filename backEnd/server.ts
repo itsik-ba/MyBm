@@ -1,7 +1,7 @@
 import express from "express";
 import "./data/data";
 import cors from 'cors'
-import jwt from 'jsonwebtoken';
+
 const app = express();
 
 app.use(cors())

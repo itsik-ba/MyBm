@@ -3,6 +3,7 @@ import "./reg_log.scss";
 import email_Icon from "../../assets/email.png"
 import password_Icon from "../../assets/password.png"
 import { useState } from "react";
+import axios from "axios";
 
 const Login = () => {
 
@@ -11,14 +12,21 @@ const Login = () => {
   const [error, setError] = useState('')
   
   
-    const userLogin = (event:any)=> {
+    const userLogin = async (event:any)=> {
      event.preventDefault();
-     console.log("object");
-     
+    
      try {
+      const response = await axios.post('http://localhost:3000/login', { email, password });
+ 
+      if (response.status === 200) {
+        // User is authenticated, handle the successful login
+        console.log('Login successful');
+        window.location.href="/main"
+    } else {
+        // Authentication failed, handle the error
+        console.error('Authentication failed');
+    }
       
-
-
 
      } catch (error) {
       console.error(error);
@@ -73,7 +81,7 @@ const Login = () => {
     </div> 
     
     <div className="subbmit-container">
-      <button className="submit" onSubmit={userLogin}>התחבר</button>
+      <button className="submit" type="submit">התחבר</button>
     </div>
 
     </form>

@@ -8,7 +8,6 @@ import { useState } from "react";
 
 
 const Register = () => {
-       
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
@@ -34,7 +33,7 @@ const Register = () => {
         setName("")
         setEmail("")
         setPassword("")
-        // goToMainPage()
+        goToLogin();
       
       } catch (error) {
         console.error(error);
@@ -42,13 +41,7 @@ const Register = () => {
   }
   
 } 
-    
-  const goToMainPage = () => {
-    
-    window.location.href="/main"
-  }
   
-
   const goToLogin = ()=> {
    window.location.href="/login"
    }
